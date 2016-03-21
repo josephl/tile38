@@ -1,3 +1,5 @@
+GIT_SHORT = $(shell git rev-parse --short HEAD)
+
 all: 
 	@./build.sh
 clean:
@@ -11,3 +13,6 @@ install: all
 uninstall: 
 	rm -f /usr/local/bin/tile38-server
 	rm -f /usr/local/bin/tile38-cli
+docker:
+	docker build -t tile38:$(GIT_SHORT) .
+	docker tag tile38:$(GIT_SHORT) tile38:latest
